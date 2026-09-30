@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Teacher — Teach me till I get it.</title>
+<title>AI Teacher</title>
 
 <style>
 * {
@@ -12,44 +12,108 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7fb;
-  color: #172033;
+  font-family: Inter, Arial, sans-serif;
+  background: #f7f8fc;
+  color: #111827;
 }
 
-header {
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 250px;
+  background: #111827;
+  color: white;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  padding: 8px 10px 25px;
+}
+
+.logo span {
+  font-size: 25px;
+}
+
+.new-chat {
+  border: 1px solid #374151;
+  background: #1f2937;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+.side-title {
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 0 10px 8px;
+  text-transform: uppercase;
+}
+
+.history {
+  color: #d1d5db;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 9px;
+}
+
+.history:hover {
+  background: #1f2937;
+}
+
+/* MAIN */
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topbar {
   height: 70px;
   background: white;
   border-bottom: 1px solid #e5e7eb;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 0 25px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
-.logo {
-  font-size: 23px;
-  font-weight: 800;
+.top-title {
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .plus {
-  background: #172033;
+  background: #111827;
   color: white;
   border: none;
   padding: 11px 18px;
-  border-radius: 12px;
-  font-weight: bold;
+  border-radius: 11px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.container {
+.content {
+  width: 100%;
   max-width: 900px;
   margin: auto;
   padding: 35px 20px;
 }
+
+/* HERO */
 
 .hero {
   text-align: center;
@@ -57,100 +121,177 @@ header {
 }
 
 .hero h1 {
-  font-size: 42px;
-  margin: 10px 0;
+  font-size: clamp(32px, 5vw, 52px);
+  margin: 0 0 10px;
+  letter-spacing: -1.5px;
 }
 
 .hero p {
-  color: #667085;
+  color: #6b7280;
   font-size: 17px;
+  margin: 0;
 }
 
-.subject {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #d8dce5;
-  border-radius: 12px;
-  background: white;
-  font-size: 15px;
+/* CONTROLS */
+
+.controls {
+  display: flex;
+  gap: 10px;
   margin-bottom: 15px;
 }
 
+select {
+  flex: 1;
+  padding: 13px;
+  border: 1px solid #dfe3ea;
+  border-radius: 12px;
+  background: white;
+  font-size: 15px;
+  outline: none;
+}
+
+.mode {
+  padding: 13px 16px;
+  border: 1px solid #dfe3ea;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* CHAT */
+
 .chat {
   background: white;
-  border: 1px solid #e3e6ed;
-  border-radius: 18px;
+  border: 1px solid #e4e7ec;
+  border-radius: 20px;
   min-height: 430px;
-  padding: 20px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+  padding: 22px;
+  box-shadow: 0 12px 35px rgba(17,24,39,0.05);
+  overflow-y: auto;
 }
 
 .message {
+  max-width: 78%;
+  padding: 14px 17px;
   margin: 12px 0;
-  padding: 13px 16px;
-  border-radius: 14px;
-  max-width: 80%;
-  line-height: 1.5;
+  border-radius: 16px;
+  line-height: 1.6;
   white-space: pre-wrap;
 }
 
+.ai {
+  background: #f0f2f6;
+  margin-right: auto;
+}
+
 .user {
-  background: #172033;
+  background: #111827;
   color: white;
   margin-left: auto;
 }
 
-.ai {
-  background: #eef1f6;
-  color: #172033;
-  margin-right: auto;
+/* QUICK ACTIONS */
+
+.quick-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
 }
+
+.quick {
+  background: white;
+  border: 1px solid #dfe3ea;
+  padding: 9px 13px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.quick:hover {
+  background: #f0f2f6;
+}
+
+/* INPUT */
 
 .input-area {
   display: flex;
   gap: 10px;
-  margin-top: 15px;
+  margin-top: 14px;
 }
 
-input {
+.input-area input {
   flex: 1;
-  padding: 15px;
   border: 1px solid #d8dce5;
-  border-radius: 13px;
+  border-radius: 14px;
+  padding: 16px;
   font-size: 16px;
   outline: none;
 }
 
 .send {
-  padding: 0 22px;
   border: none;
-  border-radius: 13px;
-  background: #172033;
+  background: #111827;
   color: white;
-  font-weight: bold;
+  padding: 0 23px;
+  border-radius: 14px;
+  font-weight: 700;
   cursor: pointer;
 }
 
 .send:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  opacity: .5;
 }
 
 .status {
   text-align: center;
-  color: #667085;
+  color: #6b7280;
   font-size: 13px;
-  margin-top: 10px;
+  margin-top: 9px;
 }
 
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 32px;
+/* MOBILE */
+
+.mobile-logo {
+  display: none;
+}
+
+@media(max-width: 700px) {
+
+  .sidebar {
+    display: none;
+  }
+
+  .topbar {
+    padding: 0 15px;
+  }
+
+  .mobile-logo {
+    display: block;
+    font-weight: 800;
+  }
+
+  .top-title {
+    display: none;
+  }
+
+  .content {
+    padding: 25px 12px;
+  }
+
+  .chat {
+    min-height: 400px;
+    border-radius: 16px;
   }
 
   .message {
     max-width: 90%;
+  }
+
+  .controls {
+    flex-direction: column;
   }
 
   .input-area {
@@ -166,50 +307,133 @@ input {
 
 <body>
 
-<header>
-  <div class="logo">🎓 AI Teacher</div>
-  <button class="plus" onclick="showPlus()">AI Teacher Plus</button>
-</header>
+<div class="app">
 
-<div class="container">
+  <!-- SIDEBAR -->
 
-  <div class="hero">
-    <h1>Teach me till I get it.</h1>
-    <p>Your personal AI tutor for school, homework and exam prep.</p>
-  </div>
+  <aside class="sidebar">
 
-  <select id="subject" class="subject">
-    <option>General</option>
-    <option>Physics</option>
-    <option>Chemistry</option>
-    <option>Biology</option>
-    <option>Mathematics</option>
-    <option>English</option>
-    <option>Computer Science</option>
-  </select>
-
-  <div class="chat" id="chat">
-    <div class="message ai">
-      Hey! 👋 I'm your AI Teacher.
-
-Tell me what you're stuck on and I'll explain it step by step.
+    <div class="logo">
+      🎓 AI Teacher
     </div>
-  </div>
 
-  <div class="input-area">
-    <input
-      id="message"
-      type="text"
-      placeholder="Ask me anything..."
-      onkeydown="if(event.key === 'Enter') sendMessage()"
-    >
-
-    <button class="send" id="sendButton" onclick="sendMessage()">
-      Send
+    <button class="new-chat" onclick="newChat()">
+      + New Chat
     </button>
-  </div>
 
-  <div class="status" id="status"></div>
+    <div class="side-title">
+      Recent
+    </div>
+
+    <div class="history">
+      Your conversations will appear here.
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="mobile-logo">
+        🎓 AI Teacher
+      </div>
+
+      <div class="top-title">
+        Personal AI Tutor
+      </div>
+
+      <button class="plus" onclick="showPlus()">
+        ⭐ Plus
+      </button>
+
+    </header>
+
+    <section class="content">
+
+      <div class="hero">
+
+        <h1>
+          Teach me till I get it.
+        </h1>
+
+        <p>
+          Your personal AI tutor for school, homework and exams.
+        </p>
+
+      </div>
+
+      <div class="controls">
+
+        <select id="subject">
+
+          <option>General</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Biology</option>
+          <option>Mathematics</option>
+          <option>English</option>
+          <option>Computer Science</option>
+
+        </select>
+
+        <button class="mode" onclick="examMode()">
+          📖 Exam Mode
+        </button>
+
+      </div>
+
+      <div class="chat" id="chat">
+
+        <div class="message ai">
+          👋 Hey! I'm your AI Teacher.
+
+Tell me what you're stuck on and I'll teach it step by step.
+        </div>
+
+      </div>
+
+      <div class="quick-actions">
+
+        <button class="quick" onclick="quickMessage('Explain this in simpler words.')">
+          🧠 Explain simpler
+        </button>
+
+        <button class="quick" onclick="quickMessage('Quiz me on this topic.')">
+          📝 Quiz me
+        </button>
+
+        <button class="quick" onclick="examMode()">
+          📖 Exam answer
+        </button>
+
+      </div>
+
+      <div class="input-area">
+
+        <input
+          id="message"
+          placeholder="Ask your AI Teacher anything..."
+          onkeydown="if(event.key === 'Enter') sendMessage()"
+        >
+
+        <button
+          class="send"
+          id="sendButton"
+          onclick="sendMessage()"
+        >
+          Send
+        </button>
+
+      </div>
+
+      <div class="status" id="status"></div>
+
+    </section>
+
+  </main>
 
 </div>
 
@@ -218,7 +442,7 @@ Tell me what you're stuck on and I'll explain it step by step.
 const WORKER_URL =
 "https://ai-teacher-api.superspiderlazer.workers.dev";
 
-async function sendMessage() {
+async function sendMessage(customMessage = null) {
 
   const input = document.getElementById("message");
   const chat = document.getElementById("chat");
@@ -226,14 +450,15 @@ async function sendMessage() {
   const status = document.getElementById("status");
   const subject = document.getElementById("subject").value;
 
-  const message = input.value.trim();
+  const message = customMessage || input.value.trim();
 
   if (!message) return;
 
-  // Show user message
   const userMessage = document.createElement("div");
+
   userMessage.className = "message user";
   userMessage.textContent = message;
+
   chat.appendChild(userMessage);
 
   input.value = "";
@@ -243,6 +468,7 @@ async function sendMessage() {
   try {
 
     const response = await fetch(WORKER_URL, {
+
       method: "POST",
 
       headers: {
@@ -250,34 +476,38 @@ async function sendMessage() {
       },
 
       body: JSON.stringify({
+
         message:
-          "Subject: " + subject +
-          "\nStudent question: " + message
+          "Subject: " +
+          subject +
+          "\nStudent request: " +
+          message
+
       })
+
     });
 
     const data = await response.json();
 
     const aiMessage = document.createElement("div");
+
     aiMessage.className = "message ai";
 
-    if (data.answer) {
-      aiMessage.textContent = data.answer;
-    } else {
-      aiMessage.textContent =
-        "Sorry, something went wrong: " +
-        (data.error || "Unknown error");
-    }
+    aiMessage.textContent =
+      data.answer ||
+      data.error ||
+      "Something went wrong.";
 
     chat.appendChild(aiMessage);
 
   } catch (error) {
 
     const aiMessage = document.createElement("div");
+
     aiMessage.className = "message ai";
 
     aiMessage.textContent =
-      "I couldn't connect to the AI server. Please try again.";
+      "I couldn't connect to the AI Teacher. Please try again.";
 
     chat.appendChild(aiMessage);
 
@@ -285,22 +515,49 @@ async function sendMessage() {
 
   button.disabled = false;
   status.textContent = "";
-  input.focus();
 
   chat.scrollTop = chat.scrollHeight;
+
+}
+
+function quickMessage(text) {
+  sendMessage(text);
+}
+
+function examMode() {
+
+  const input = document.getElementById("message");
+
+  input.value =
+    "Explain my next question in proper exam/board-answer style.";
+
+  input.focus();
+
+}
+
+function newChat() {
+
+  document.getElementById("chat").innerHTML = `
+    <div class="message ai">
+      👋 New chat started!
+
+What do you want to learn today?
+    </div>
+  `;
+
 }
 
 function showPlus() {
 
   alert(
-    "AI Teacher Plus\n\n" +
-    "• Higher AI usage\n" +
-    "• Exam-style answers\n" +
-    "• Study plans\n" +
-    "• Practice tests\n" +
-    "• Image/question uploads\n" +
-    "• Saved progress\n\n" +
-    "Plus — $4.99/month"
+    "⭐ AI Teacher Plus\n\n" +
+    "Higher AI usage\n" +
+    "Exam & board-style answers\n" +
+    "Study plans\n" +
+    "Practice tests\n" +
+    "Image questions\n" +
+    "Saved progress\n\n" +
+    "$4.99/month"
   );
 
 }
