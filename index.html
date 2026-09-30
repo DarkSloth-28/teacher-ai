@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Teacher</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+header {
+    background: #4f46e5;
+    color: white;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.plus {
+    background: #ffd43b;
+    color: #222;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+.welcome {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.welcome h1 {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #666;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+select {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: white;
+}
+
+.chat {
+    background: white;
+    min-height: 350px;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow-y: auto;
+}
+
+.message {
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 12px;
+    max-width: 80%;
+    line-height: 1.5;
+}
+
+.teacher {
+    background: #eef2ff;
+}
+
+.user {
+    background: #4f46e5;
+    color: white;
+    margin-left: auto;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+input {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.send {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 0 22px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #777;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .welcome h1 {
+        font-size: 27px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎓 AI Teacher</div>
+    <button class="plus" onclick="plus()">⭐ PLUS</button>
+</header>
+
+<div class="container">
+
+    <div class="welcome">
+        <h1>Learn Smarter 🚀</h1>
+        <p>Ask anything and I'll help you understand it.</p>
+    </div>
+
+    <div class="controls">
+        <select id="subject">
+            <option>General</option>
+            <option>Physics</option>
+            <option>Chemistry</option>
+            <option>Biology</option>
+            <option>Mathematics</option>
+            <option>English</option>
+            <option>Computer Science</option>
+        </select>
+    </div>
+
+    <div class="chat" id="chat">
+        <div class="message teacher">
+            👋 Hi! I'm your AI Teacher.<br><br>
+            Ask me a question and I'll explain it in simple words.
+        </div>
+    </div>
+
+    <div class="input-area">
+        <input
+            id="question"
+            type="text"
+            placeholder="Ask your teacher something..."
+            onkeydown="if(event.key==='Enter') askQuestion()"
+        >
+        <button class="send" onclick="askQuestion()">Send</button>
+    </div>
+
+    <footer>
+        AI Teacher • Learn anything, anytime
+    </footer>
+
+</div>
+
+<script>
+
+function askQuestion() {
+
+    const input = document.getElementById("question");
+    const chat = document.getElementById("chat");
+    const subject = document.getElementById("subject").value;
+
+    const question = input.value.trim();
+
+    if (!question) return;
+
+    const userMessage = document.createElement("div");
+    userMessage.className = "message user";
+    userMessage.textContent = question;
+
+    chat.appendChild(userMessage);
+
+    input.value = "";
+
+    const teacherMessage = document.createElement("div");
+    teacherMessage.className = "message teacher";
+
+    teacherMessage.innerHTML =
+        "🤖 I'm ready to teach you!<br><br>" +
+        "You asked about <b>" + subject + "</b>.<br>" +
+        "The AI brain will be connected in the next step.";
+
+    chat.appendChild(teacherMessage);
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function plus() {
+    alert(
+        "⭐ AI Teacher Plus\n\n" +
+        "Coming soon!\n\n" +
+        "• More powerful AI\n" +
+        "• Unlimited questions\n" +
+        "• Exam preparation\n" +
+        "• Personal study plans\n" +
+        "• Advanced explanations"
+    );
+}
+
+</script>
+
+</body>
+</html>
