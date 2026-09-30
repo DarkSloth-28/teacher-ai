@@ -3,148 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Teacher</title>
+<title>AI Teacher — Teach me till I get it.</title>
 
 <style>
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #222;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #172033;
 }
 
 header {
-    background: #4f46e5;
-    color: white;
-    padding: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
+  font-size: 23px;
+  font-weight: 800;
 }
 
 .plus {
-    background: #ffd43b;
-    color: #222;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
+  background: #172033;
+  color: white;
+  border: none;
+  padding: 11px 18px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .container {
-    max-width: 850px;
-    margin: 30px auto;
-    padding: 15px;
+  max-width: 900px;
+  margin: auto;
+  padding: 35px 20px;
 }
 
-.welcome {
-    text-align: center;
-    margin-bottom: 25px;
+.hero {
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-.welcome h1 {
-    font-size: 34px;
-    margin-bottom: 8px;
+.hero h1 {
+  font-size: 42px;
+  margin: 10px 0;
 }
 
-.welcome p {
-    color: #666;
+.hero p {
+  color: #667085;
+  font-size: 17px;
 }
 
-.controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-select {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background: white;
+.subject {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #d8dce5;
+  border-radius: 12px;
+  background: white;
+  font-size: 15px;
+  margin-bottom: 15px;
 }
 
 .chat {
-    background: white;
-    min-height: 350px;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    overflow-y: auto;
+  background: white;
+  border: 1px solid #e3e6ed;
+  border-radius: 18px;
+  min-height: 430px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
 }
 
 .message {
-    padding: 12px 15px;
-    margin: 10px 0;
-    border-radius: 12px;
-    max-width: 80%;
-    line-height: 1.5;
-}
-
-.teacher {
-    background: #eef2ff;
+  margin: 12px 0;
+  padding: 13px 16px;
+  border-radius: 14px;
+  max-width: 80%;
+  line-height: 1.5;
+  white-space: pre-wrap;
 }
 
 .user {
-    background: #4f46e5;
-    color: white;
-    margin-left: auto;
+  background: #172033;
+  color: white;
+  margin-left: auto;
+}
+
+.ai {
+  background: #eef1f6;
+  color: #172033;
+  margin-right: auto;
 }
 
 .input-area {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 input {
-    flex: 1;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    font-size: 16px;
+  flex: 1;
+  padding: 15px;
+  border: 1px solid #d8dce5;
+  border-radius: 13px;
+  font-size: 16px;
+  outline: none;
 }
 
 .send {
-    background: #4f46e5;
-    color: white;
-    border: none;
-    padding: 0 22px;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
+  padding: 0 22px;
+  border: none;
+  border-radius: 13px;
+  background: #172033;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-footer {
-    text-align: center;
-    margin-top: 30px;
-    color: #777;
-    font-size: 13px;
+.send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status {
+  text-align: center;
+  color: #667085;
+  font-size: 13px;
+  margin-top: 10px;
 }
 
 @media (max-width: 600px) {
-    .welcome h1 {
-        font-size: 27px;
-    }
+  .hero h1 {
+    font-size: 32px;
+  }
 
-    .controls {
-        flex-direction: column;
-    }
+  .message {
+    max-width: 90%;
+  }
 
-    .message {
-        max-width: 90%;
-    }
+  .input-area {
+    flex-direction: column;
+  }
+
+  .send {
+    padding: 14px;
+  }
 }
 </style>
 </head>
@@ -152,95 +167,142 @@ footer {
 <body>
 
 <header>
-    <div class="logo">🎓 AI Teacher</div>
-    <button class="plus" onclick="plus()">⭐ PLUS</button>
+  <div class="logo">🎓 AI Teacher</div>
+  <button class="plus" onclick="showPlus()">AI Teacher Plus</button>
 </header>
 
 <div class="container">
 
-    <div class="welcome">
-        <h1>Learn Smarter 🚀</h1>
-        <p>Ask anything and I'll help you understand it.</p>
-    </div>
+  <div class="hero">
+    <h1>Teach me till I get it.</h1>
+    <p>Your personal AI tutor for school, homework and exam prep.</p>
+  </div>
 
-    <div class="controls">
-        <select id="subject">
-            <option>General</option>
-            <option>Physics</option>
-            <option>Chemistry</option>
-            <option>Biology</option>
-            <option>Mathematics</option>
-            <option>English</option>
-            <option>Computer Science</option>
-        </select>
-    </div>
+  <select id="subject" class="subject">
+    <option>General</option>
+    <option>Physics</option>
+    <option>Chemistry</option>
+    <option>Biology</option>
+    <option>Mathematics</option>
+    <option>English</option>
+    <option>Computer Science</option>
+  </select>
 
-    <div class="chat" id="chat">
-        <div class="message teacher">
-            👋 Hi! I'm your AI Teacher.<br><br>
-            Ask me a question and I'll explain it in simple words.
-        </div>
-    </div>
+  <div class="chat" id="chat">
+    <div class="message ai">
+      Hey! 👋 I'm your AI Teacher.
 
-    <div class="input-area">
-        <input
-            id="question"
-            type="text"
-            placeholder="Ask your teacher something..."
-            onkeydown="if(event.key==='Enter') askQuestion()"
-        >
-        <button class="send" onclick="askQuestion()">Send</button>
+Tell me what you're stuck on and I'll explain it step by step.
     </div>
+  </div>
 
-    <footer>
-        AI Teacher • Learn anything, anytime
-    </footer>
+  <div class="input-area">
+    <input
+      id="message"
+      type="text"
+      placeholder="Ask me anything..."
+      onkeydown="if(event.key === 'Enter') sendMessage()"
+    >
+
+    <button class="send" id="sendButton" onclick="sendMessage()">
+      Send
+    </button>
+  </div>
+
+  <div class="status" id="status"></div>
 
 </div>
 
 <script>
 
-function askQuestion() {
+const WORKER_URL =
+"https://ai-teacher-api.superspiderlazer.workers.dev";
 
-    const input = document.getElementById("question");
-    const chat = document.getElementById("chat");
-    const subject = document.getElementById("subject").value;
+async function sendMessage() {
 
-    const question = input.value.trim();
+  const input = document.getElementById("message");
+  const chat = document.getElementById("chat");
+  const button = document.getElementById("sendButton");
+  const status = document.getElementById("status");
+  const subject = document.getElementById("subject").value;
 
-    if (!question) return;
+  const message = input.value.trim();
 
-    const userMessage = document.createElement("div");
-    userMessage.className = "message user";
-    userMessage.textContent = question;
+  if (!message) return;
 
-    chat.appendChild(userMessage);
+  // Show user message
+  const userMessage = document.createElement("div");
+  userMessage.className = "message user";
+  userMessage.textContent = message;
+  chat.appendChild(userMessage);
 
-    input.value = "";
+  input.value = "";
+  button.disabled = true;
+  status.textContent = "AI Teacher is thinking...";
 
-    const teacherMessage = document.createElement("div");
-    teacherMessage.className = "message teacher";
+  try {
 
-    teacherMessage.innerHTML =
-        "🤖 I'm ready to teach you!<br><br>" +
-        "You asked about <b>" + subject + "</b>.<br>" +
-        "The AI brain will be connected in the next step.";
+    const response = await fetch(WORKER_URL, {
+      method: "POST",
 
-    chat.appendChild(teacherMessage);
+      headers: {
+        "Content-Type": "application/json"
+      },
 
-    chat.scrollTop = chat.scrollHeight;
+      body: JSON.stringify({
+        message:
+          "Subject: " + subject +
+          "\nStudent question: " + message
+      })
+    });
+
+    const data = await response.json();
+
+    const aiMessage = document.createElement("div");
+    aiMessage.className = "message ai";
+
+    if (data.answer) {
+      aiMessage.textContent = data.answer;
+    } else {
+      aiMessage.textContent =
+        "Sorry, something went wrong: " +
+        (data.error || "Unknown error");
+    }
+
+    chat.appendChild(aiMessage);
+
+  } catch (error) {
+
+    const aiMessage = document.createElement("div");
+    aiMessage.className = "message ai";
+
+    aiMessage.textContent =
+      "I couldn't connect to the AI server. Please try again.";
+
+    chat.appendChild(aiMessage);
+
+  }
+
+  button.disabled = false;
+  status.textContent = "";
+  input.focus();
+
+  chat.scrollTop = chat.scrollHeight;
 }
 
-function plus() {
-    alert(
-        "⭐ AI Teacher Plus\n\n" +
-        "Coming soon!\n\n" +
-        "• More powerful AI\n" +
-        "• Unlimited questions\n" +
-        "• Exam preparation\n" +
-        "• Personal study plans\n" +
-        "• Advanced explanations"
-    );
+function showPlus() {
+
+  alert(
+    "AI Teacher Plus\n\n" +
+    "• Higher AI usage\n" +
+    "• Exam-style answers\n" +
+    "• Study plans\n" +
+    "• Practice tests\n" +
+    "• Image/question uploads\n" +
+    "• Saved progress\n\n" +
+    "Plus — $4.99/month"
+  );
+
 }
 
 </script>
